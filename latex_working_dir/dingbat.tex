@@ -1,0 +1,48 @@
+\nopagenumbers
+
+
+\font\ding dingbat scaled 1200
+
+\setbox0=\hbox{\ding\char'141}
+\newdimen\charwidth \charwidth\wd0
+\def\updoublerulefill{\xleaders\hbox to 10pt
+            {\hss\ding\char'142 \hss}\hfill}
+\def\downdoublerulefill{\xleaders\hbox to 10pt
+            {\hss\ding\char'147 \hss}\hfill}
+\def\leftdoublerulefill{\xleaders\vbox to 10pt
+        {\vss\hbox{\ding\char'144}\vss}\vfill}
+\def\rightdoublerulefill{\xleaders\vbox to 10pt
+        {\vss\hbox{\ding\char'145}\vss}\vfill}
+
+\newdimen\Width \newdimen\Height
+\Width\hsize \Height\vsize
+\def\rramec{\vbox to\Height
+  {\hbox to\Width{\ding\char'141\updoublerulefill{\char'143}}
+   \xleaders\vbox to 10pt
+      {\vss\hbox to\Width{\ding\char'144\hfill\char'145}\vss}
+    \vfill
+    \hbox to\Width{\ding\char'146\downdoublerulefill{\char'150}}}}
+
+\def\RRamec #1{\setbox0=\vbox{#1}\Height\ht0\advance\Height\dp0
+        \Width\wd0 \advance\Width 2\charwidth 
+  \vbox
+  {\hbox to\Width{\ding\char'141\updoublerulefill{\char'143}}
+    \hbox to\Width{\vbox to\Height{\leftdoublerulefill}\hss
+    \box0\hss\vbox to\Height{\rightdoublerulefill}}
+    \hbox to\Width{\ding\char'146\downdoublerulefill{\char'150}}}}
+
+\rramec
+\tolerance 800
+\RRamec{\hsize 5cm Hip hip hurrahhh Hip hip hurrahhh Hip hip
+hurrahhh Hip hip hurrahhh Hip hip hurrahhh Hip hip hurrahhh Hip
+hip hurrahhh Hip hip hurrahhh Hip hip hurrahhh Hip hip hurrahhh
+Hip hip hurrahhh Hip hip hurrahhh Hip hip hurrahhh Hip hip
+hurrahhh Hip hip hurrahhh Hip hip hurrahhh Hip hip hurrahhh Hip
+hip hurrahhh Hip hip hurrahhh Hip hip hurrahhh Hip hip hurrahhh
+Hip hip hurrahhh Hip hip hurrahhh Hip hip hurrahhh Hip hip
+hurrahhh Hip hip hurrahhh Hip hip hurrahhh Hip hip hurrahhh Hip
+hip hurrahhh Hip hip hurrahhh Hip hip hurrahhh Hip hip hurrahhh}
+
+
+
+\bye
