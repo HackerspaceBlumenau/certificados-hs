@@ -1,9 +1,12 @@
 from argparse import ArgumentParser
 from datetime import datetime
+import json
 from os import mkdir, path
 import os
 from subprocess import run
 from shutil import rmtree, move
+
+import assinatura
 
 
 LATEX_WORKING_DIR = './latex_working_dir'
@@ -80,13 +83,21 @@ def preencher_certificado(latex, dados):
 
 
 def dados_certificado(participante, evento, data_evento, duracao_evento):
-    return {
+    dados = {
         'NOME-PARTICIPANTE': participante.upper(),
         'NOME-EVENTO': evento.upper(),
         'DATA-EVENTO': data_evento,
         'DURACAO-EVENTO': duracao_evento,
         'DATA-EMISSAO': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
     }
+ 
+    dados['HASH-VALIDACAO'] = assinatura.gerar(
+        json.dumps(dados),
+        os.environ['CHAVE_ASSINATURA_CERTIFICADO'],
+        os.environ['SENHA_CHAVE_ASSINATURA_CERTIFICADO']
+    )
+
+    return dados
 
 
 if __name__ == '__main__':
