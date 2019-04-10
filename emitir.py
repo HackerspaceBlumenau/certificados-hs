@@ -94,7 +94,7 @@ def dados_certificado(participante, evento, data_evento, duracao_evento):
     dados['HASH-VALIDACAO'] = assinatura.gerar(
         json.dumps(dados),
         os.environ['CHAVE_ASSINATURA_CERTIFICADO'],
-        os.environ['SENHA_CHAVE_ASSINATURA_CERTIFICADO']
+        os.environ['SALT_ASSINATURA_CERTIFICADO'],
     )
 
     return dados
