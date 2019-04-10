@@ -112,6 +112,4 @@ if __name__ == '__main__':
             output_dir=certificados_dir
         )
 
-
-
     # rmtree(certificados_dir)
