@@ -5,6 +5,11 @@
 \usepackage{ulem}
 \usepackage{graphicx}
 \usepackage{geometry}
+\usepackage[pdfauthor={Hackerspace Blumenau},
+            pdftitle={Certificado de Participação},
+            pdfsubject={HASH-VALIDACAO}]{hyperref}
+
+\usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 
 \geometry{tmargin=.5cm,bmargin=.5cm,
@@ -32,43 +37,59 @@ lmargin=.5cm,rmargin=.5cm}
 {\border \char115} % lower right
 {\centering
 
-% COLOCAR LOGO
-% \begin{minipage}{.9\textwidth}
-% \centering
-% \includegraphics[height=1.1cm]{escudozz.pdf}
-% \end{minipage}
+    % COLOCAR LOGO
+    % \begin{minipage}{.9\textwidth}
+    % \centering
+    % \includegraphics[height=1.1cm]{escudozz.pdf}
+    % \end{minipage}
 
-\curlyframe[.9\columnwidth]{
 
-% \textcolor{red!10!black!90}
-% {\small University of Nobodyknows}\\
-
-\textcolor{red!30!black!90}
-{\large \textsc{Certificado de Participação} }
-
-\smallskip
-
-\textcolor{green!10!black!90}{
-    \tiny {
-        Certificamos que \textbf{ALGUM NOME} 
-        participou do evento \textbf{ALGUM EVENTO}
-        no dia \textbf{ALGUMA DATA}
-        com duração de \textbf{ALGUMA DURACAO}.
+    % \textcolor{red!10!black!90}
+    % {\small University of Nobodyknows}\\
+    
+    \textcolor{red!30!black!90}
+    {\large \textsc{\underline{Certificado de Participação}} }
+    
+    \bigskip
+    \bigskip
+    
+    \textcolor{green!10!black!90}{
+        \tiny{
+            Certificamos que \textbf{NOME-PARTICIPANTE} 
+            participou do evento \textbf{NOME-EVENTO}
+            no dia \textbf{DATA-EVENTO}
+            com duração de \textbf{DURACAO-EVENTO}.
+        }
+    }
+    
+    \bigskip
+    \bigskip
+    \bigskip
+    \bigskip
+    \bigskip
+    
+    \tiny
+    {\color{blue!40!black}
+        \scalebox{.7}{
+            \begin{tabular}{ccc}
+            \cline{1-1}  \cline{3-3} \\
+            Grupy Blumenau                      & & Hackerspace Blumenau \\
+            https://blumenau.sc.python.org.br/  & & http://www.hackerspaceblumenau.org/ \\ 
+            \end{tabular}
+        }
+    }
+    
+    \bigskip
+    
+    \textcolor{black}{
+        \tiny{
+            \scalebox{.5}{
+                Certificado emitido em DATA-EMISSAO.
+                Para validar, entre em contato com \emph{hackerspaceblumenau@gmail.com}.
+            }
+        }
     }
 }
-
-\smallskip
-
-\vspace{10mm}
-\tiny
-{\color{blue!40!black}
-\scalebox{.7}{
-\begin{tabular}{ccc}
-\cline{1-1}  \cline{3-3} \\
-Grupy Blumenau                      & & Hackerspace Blumenau \\
-https://blumenau.sc.python.org.br/  & & http://www.hackerspaceblumenau.org/ \\ 
-\end{tabular}
-}}}}
 \end{minipage}
 }
 \end{document}

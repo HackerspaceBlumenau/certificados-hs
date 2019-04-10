@@ -1,8 +1,9 @@
 from argparse import ArgumentParser
-from subprocess import run
+from datetime import datetime
 from os import mkdir, path
-from shutil import rmtree, move
 import os
+from subprocess import run
+from shutil import rmtree, move
 
 
 LATEX_WORKING_DIR = './latex_working_dir'
@@ -72,12 +73,20 @@ def gerar_certificado(latex_certificado, id, latex_working_dir, output_dir):
     return final_pdf
 
 
-def preencher_certificado(latex, nome, evento, data, duracao):
-    latex = latex.replace('ALGUM NOME', nome.upper())
-    latex = latex.replace('ALGUM EVENTO', evento.upper())
-    latex = latex.replace('ALGUMA DATA', data)
-    latex = latex.replace('ALGUMA DURACAO', duracao)
+def preencher_certificado(latex, dados):
+    for (variavel, valor) in dados.items():
+        latex = latex.replace(variavel, valor)
     return latex
+
+
+def dados_certificado(participante, evento, data_evento, duracao_evento):
+    return {
+        'NOME-PARTICIPANTE': participante.upper(),
+        'NOME-EVENTO': evento.upper(),
+        'DATA-EVENTO': data_evento,
+        'DURACAO-EVENTO': duracao_evento,
+        'DATA-EMISSAO': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+    }
 
 
 if __name__ == '__main__':
@@ -93,8 +102,8 @@ if __name__ == '__main__':
     template_latex = ler_tex(args.tex)
 
     for (i, (nome, email)) in enumerate(nomes_emails):
-        latex_certificado = preencher_certificado(template_latex, nome, args.evento,
-                                                  args.data, args.duracao)
+        dados = dados_certificado(nome, args.evento, args.data, args.duracao)
+        latex_certificado = preencher_certificado(template_latex, dados)
 
         caminho_certificado_pdf = gerar_certificado(
             latex_certificado,
