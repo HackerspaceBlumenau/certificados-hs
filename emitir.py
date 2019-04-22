@@ -7,7 +7,7 @@ from subprocess import run
 from shutil import rmtree, move
 
 import assinatura
-
+from email import EmailSmtp
 
 LATEX_WORKING_DIR = './latex_working_dir'
 
@@ -93,8 +93,8 @@ def dados_certificado(participante, evento, data_evento, duracao_evento):
  
     dados['HASH-VALIDACAO'] = assinatura.gerar(
         json.dumps(dados),
-        os.environ['CHAVE_ASSINATURA_CERTIFICADO'],
-        os.environ['SALT_ASSINATURA_CERTIFICADO'],
+        os.environ['CERTIFICADO_CHAVE_ASSINATURA'],
+        os.environ['CERTIFICADO_SALT_ASSINATURA'],
     )
 
     return dados
@@ -109,6 +109,12 @@ if __name__ == '__main__':
     
     mkdir(certificados_dir)
 
+    email_smtp = EmailSmtp()
+    email_smtp.autenticar(
+        os.environ['CERTIFICADO_EMAIL'],
+        os.environ['CERTIFICADO_EMAIL_SENHA'],
+    )
+
     nomes_emails = ler_nomes_emails(args.csv)
     template_latex = ler_tex(args.tex)
 
@@ -122,5 +128,15 @@ if __name__ == '__main__':
             latex_working_dir=LATEX_WORKING_DIR,
             output_dir=certificados_dir
         )
+
+        email_smtp.enviar_certificado_por_email({
+            'de': os.environ['CERTIFICADO_EMAIL'],
+            'para': email,
+            'assunto': 'Certificado de participação',
+            'conteudo': f'Certificado de participação no evento {args.evento.upper()}',
+            'caminho_certificado_pdf': caminho_certificado_pdf
+        })
+
+    email_smtp.fechar()
 
     # rmtree(certificados_dir)
