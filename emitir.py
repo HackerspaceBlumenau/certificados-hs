@@ -94,7 +94,6 @@ def dados_certificado(participante, evento, data_evento, duracao_evento):
     dados['HASH-VALIDACAO'] = assinatura.gerar(
         json.dumps(dados),
         os.environ['CERTIFICADO_CHAVE_ASSINATURA'],
-        os.environ['CERTIFICADO_SALT_ASSINATURA'],
     )
 
     return dados
@@ -133,7 +132,8 @@ if __name__ == '__main__':
             'de': os.environ['CERTIFICADO_EMAIL'],
             'para': email,
             'assunto': 'Certificado de participação',
-            'conteudo': f'Certificado de participação no evento {args.evento.upper()}',
+            'conteudo': f'''Olá {nome.upper()}.
+            Segue o seu certificado de participação no evento {args.evento.upper()}.''',
             'caminho_certificado_pdf': caminho_certificado_pdf
         })
 

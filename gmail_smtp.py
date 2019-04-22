@@ -7,15 +7,15 @@ from email import encoders
 
 class GmailSmtp:
 
-    def autenticar(usuario, senha):
+    def autenticar(self, usuario, senha):
         self._server = smtplib.SMTP('smtp.gmail.com', 587)
         self._server.starttls()
         self._server.login(usuario, senha)
 
-    def fechar():
+    def fechar(self):
         self._server.quit()
 
-    def enviar_certificado_por_email(dados_email, usuario, senha):
+    def enviar_certificado_por_email(self, dados_email):
         msg = MIMEMultipart()
 
         msg['From'] = dados_email['de']
