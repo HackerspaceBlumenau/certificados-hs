@@ -16,4 +16,4 @@ def verificar(conteudo, caminho_chave):
         fernet = Fernet(key_file.read())
     
     conteudo = base64.urlsafe_b64decode(conteudo)
-    return fernet.decrypt(conteudo)
+    return fernet.decrypt(conteudo).decode('utf-8')
