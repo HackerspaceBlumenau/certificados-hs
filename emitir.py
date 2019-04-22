@@ -7,7 +7,7 @@ from subprocess import run
 from shutil import rmtree, move
 
 import assinatura
-from email import EmailSmtp
+from gmail_smtp import GmailSmtp
 
 LATEX_WORKING_DIR = './latex_working_dir'
 
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     
     mkdir(certificados_dir)
 
-    email_smtp = EmailSmtp()
+    email_smtp = GmailSmtp()
     email_smtp.autenticar(
         os.environ['CERTIFICADO_EMAIL'],
         os.environ['CERTIFICADO_EMAIL_SENHA'],

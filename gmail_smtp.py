@@ -4,7 +4,8 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-class EmailSmtp:
+
+class GmailSmtp:
 
     def autenticar(usuario, senha):
         self._server = smtplib.SMTP('smtp.gmail.com', 587)
