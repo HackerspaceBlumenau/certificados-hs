@@ -108,6 +108,7 @@ if __name__ == '__main__':
     
     mkdir(certificados_dir)
 
+    print('Autenticando servidor SMTP...')
     email_smtp = GmailSmtp()
     email_smtp.autenticar(
         os.environ['CERTIFICADO_EMAIL'],
@@ -117,6 +118,7 @@ if __name__ == '__main__':
     nomes_emails = ler_nomes_emails(args.csv)
     template_latex = ler_tex(args.tex)
 
+    print('Emitindo certificados')
     for (i, (nome, email)) in enumerate(nomes_emails):
         dados = dados_certificado(nome, args.evento, args.data, args.duracao)
         latex_certificado = preencher_certificado(template_latex, dados)
@@ -132,11 +134,13 @@ if __name__ == '__main__':
             'de': os.environ['CERTIFICADO_EMAIL'],
             'para': email,
             'assunto': 'Certificado de participação',
-            'conteudo': f'''Olá {nome.upper()}.
-            Segue o seu certificado de participação no evento {args.evento.upper()}.''',
+            'conteudo': (f'Olá, {nome.upper()}.\n'
+                         f'Segue o seu certificado de participação no evento {args.evento.upper()}.'),
             'caminho_certificado_pdf': caminho_certificado_pdf
         })
 
-    email_smtp.fechar()
+        print(f'Certificado emitido e enviado para {nome}: {email}.')
 
-    # rmtree(certificados_dir)
+    email_smtp.fechar()
+    rmtree(certificados_dir)
+    print('Finalizou a emissão de certificados.')
