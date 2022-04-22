@@ -4,5 +4,5 @@ cffi==1.12.3
 cryptography==3.3.2
 ecdsa==0.13.3
 pycparser==2.19
-pypdf2==1.26.0
+pypdf2==1.27.5
 six==1.12.0
